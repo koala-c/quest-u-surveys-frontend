@@ -1,0 +1,35 @@
+{
+    "preguntes": [
+      {
+        "id": "nom",
+        "tipus": "text",
+        "pregunta": "Quin és el teu nom?",
+        "placeholder": "Escriu el teu nom aquí"
+      },
+      {
+        "id": "edat",
+        "tipus": "number",
+        "pregunta": "Quants anys tens?",
+        "placeholder": "Escriu la teva edat aquí"
+      },
+      {
+        "id": "ciutat",
+        "tipus": "text",
+        "pregunta": "De quina ciutat ets?",
+        "placeholder": "Escriu la teva ciutat aquí"
+      },
+      {
+        "id": "interes",
+        "tipus": "select",
+        "pregunta": "Quin és el teu àmbit d'interès principal?",
+        "opcions": [
+          "Tecnologia",
+          "Esports",
+          "Música",
+          "Art",
+          "Ciència"
+        ]
+      }
+    ]
+  }
+  
