@@ -159,10 +159,42 @@ function anteriorPregunta() {
 }
 
 // Función para enviar el formulario (cuando se llega a la última pregunta)
-function enviarFormulario() {
-    // Aquí puedes implementar la lógica para enviar el formulario
-    console.log('¡Formulario enviado!');
+async function enviarFormulario() {
+    // Obté les respostes del formulari
+    const formulari = document.getElementById('formulari');
+    const formData = new FormData(formulari);
+
+    // Converteix les dades del formulari a un objecte JSON
+    const dades = {};
+    formData.forEach((valor, clau) => {
+        dades[clau] = valor;
+    });
+
+    try {
+        // Envia les dades al servidor mitjançant una crida POST
+        const response = await fetch('http://127.0.0.1:8001/api/response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dades)
+        });
+
+        if (response.ok) {
+            console.log('Respostes enviades amb èxit al servidor.');
+            // Aquí pots gestionar la resposta del servidor si és necessari
+        } else {
+            console.error('Error en enviar les respostes:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error en enviar les respostes:', error);
+    }
 }
+
+document.getElementById('formulari').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulari es recarregui la pàgina
+    enviarFormulario();
+});
 
 // Función para obtener un parámetro de la URL por su nombre
 function obtenerParametroUrl(nombre) {
