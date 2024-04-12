@@ -14,7 +14,7 @@ async function obtenirArxius(carpeta) {
 
 // Funció per carregar la llista d'enquestes disponibles
 async function carregarLlistaEnquestes() {
-    const carpetaPreguntes = 'preguntes/JSON';
+    const carpetaPreguntes = './preguntes/JSON';
 
     // Obté una llista dels arxius JSON de la carpeta "preguntes/JSON"
     const arxius = await obtenirArxius(carpetaPreguntes);
@@ -96,6 +96,18 @@ function mostrarPregunta() {
     input.type = pregunta.tipus;
     input.placeholder = pregunta.placeholder || '';
 
+    input.addEventListener('keydown', function(event) {
+        // Comprova si la tecla premuda és la tecla "Enter"
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita l'enviament del formulari
+            if (preguntaActual < preguntas.length - 1) {
+                siguientePregunta(); // Passa a la següent pregunta
+            } else {
+                enviarFormulari(); // Envia el formulari
+            }
+        }
+    });
+
     if (pregunta.opcions) { // Si es un campo select
         const select = document.createElement('select');
         pregunta.opcions.forEach(opcion => {
@@ -119,7 +131,7 @@ function mostrarPregunta() {
         botonSiguiente.classList.add('form-buttons');
     } else {
         botonSiguiente.textContent = 'Enviar';
-        botonSiguiente.addEventListener('click', enviarFormulario);
+        botonSiguiente.addEventListener('click', enviarFormulari);
         botonSiguiente.classList.add('submit-button');
     }
     
@@ -136,15 +148,15 @@ function mostrarPregunta() {
         botoDiv.classList.add('space-div');
         formulariDiv.appendChild(botoDiv);
     }
-    else {
-        botoDiv.appendChild(botonSiguiente);
-        botoDiv.classList.add('right-div');
-        formulariDiv.appendChild(botoDiv);
-    }
+
+    // Afegir el botó de "Siguiente" o "Enviar"
     botoDiv.appendChild(botonSiguiente);
     botoDiv.classList.add('space-div');
+
+    // Afegir botoDiv al formulari
     formulariDiv.appendChild(botoDiv);
 }
+
 
 // Función para pasar a la siguiente pregunta
 function siguientePregunta() {
@@ -158,21 +170,36 @@ function anteriorPregunta() {
     mostrarPregunta();
 }
 
-// Función para enviar el formulario (cuando se llega a la última pregunta)
-async function enviarFormulario() {
-    // Obté les respostes del formulari
-    const formulari = document.getElementById('formulari');
-    const formData = new FormData(formulari);
-
-    // Converteix les dades del formulari a un objecte JSON
-    const dades = {};
-    formData.forEach((valor, clau) => {
-        dades[clau] = valor;
-    });
-
+// Funció per enviar el formulari (quan s'arriba a la última pregunta)
+async function enviarFormulari() {
     try {
+        // Obté les respostes del formulari
+        const formulari = document.getElementById('formulari');
+        if (!formulari || formulari.nodeName !== 'FORM') {
+            console.error('L\'element del formulari no és vàlid');
+            return;
+        }
+        
+        const formData = new FormData(formulari);
+
+        // Estructura de les dades per a l'enviament al servidor
+        const dades = {
+            answers: [] // Array per emmagatzemar les respostes
+        };
+
+        // Recorre totes les claus i valors del formulari per construir les respostes
+        formData.forEach((valor, clau) => {
+            // Afegir cada resposta al format d'objecte esperat pel backend
+            const resposta = {
+                question_id: clau, // ID de la pregunta corresponent
+                answer: valor // Valor de la resposta
+            };
+            // Afegir la resposta a l'array de respostes
+            dades.answers.push(resposta);
+        });
+
         // Envia les dades al servidor mitjançant una crida POST
-        const response = await fetch('http://127.0.0.1:8001/api/response', {
+        const response = await fetch('http://10.2.246.94:8001/api/preguntes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -193,7 +220,7 @@ async function enviarFormulario() {
 
 document.getElementById('formulari').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulari es recarregui la pàgina
-    enviarFormulario();
+    enviarFormulari();
 });
 
 // Función para obtener un parámetro de la URL por su nombre

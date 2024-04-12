@@ -54,3 +54,14 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #c54409;
 }
+
+.logo {
+    height: 100%;
+    width: 100%;
+}
+
+.logo img {
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+}
