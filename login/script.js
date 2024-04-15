@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             // Aquí puedes manejar la respuesta del backend, por ejemplo, redireccionar a otra página
             console.log(data);
-            window.location.href = 'http://10.2.246.94:8081/frontend/enquestes/';
+            window.location.href = 'http://10.2.246.94:8081/frontend/';
             // window.location.href = 'http://127.0.0.1:5500'; // Localhost
         })
         .catch(error => {
