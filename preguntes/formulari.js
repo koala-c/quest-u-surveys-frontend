@@ -1,60 +1,13 @@
-// Funció per obtenir una llista dels arxius d'una carpeta
-async function obtenirArxius(carpeta) {
-    try {
-        const resposta = await fetch(carpeta);
-        const text = await resposta.text();
-        const parser = new DOMParser();
-        const documentHTML = parser.parseFromString(text, 'text/html');
-        const enllacos = documentHTML.querySelectorAll('a');
-        return Array.from(enllacos)
-            .map(enllac => {
-                const rutaArxiu = enllac.getAttribute('href');
-                // Només retorna el nom del fitxer, sense cap ruta prèvia
-                return rutaArxiu.substring(rutaArxiu.lastIndexOf('/') + 1);
-            })
-            .filter(enllac => enllac.endsWith('.json'));
-    } catch (error) {
-        console.error('Error en obtenir els arxius:', error);
-        return [];
-    }
-}
-
-// Funció per carregar la llista d'enquestes disponibles
-async function carregarLlistaEnquestes() {
-    const carpetaPreguntes = '/enquestes/preguntes/JSON';
-
-    // Obté una llista dels arxius JSON de la carpeta "preguntes/JSON"
-    const arxius = await obtenirArxius(carpetaPreguntes);
-
-    const llistaEnquestes = document.getElementById('llista-enquestes');
-
-    // Itera sobre cada arxiu JSON
-    arxius.forEach(arxiu => {
-        // Obtenir el nom de l'arxiu sense l'extensió .json
-        const nomEnquesta = arxiu.split('/').pop().replace('.json', '').replace(/-/g, ' ').charAt(0).toUpperCase() + arxiu.split('/').pop().replace('.json', '').replace(/-/g, ' ').slice(1);
-
-        // Crea un element d'enllaç per cada arxiu JSON
-        const enllaç = document.createElement('a');
-        enllaç.textContent = nomEnquesta;
-        enllaç.href = `preguntes/formulari.html?arxiu=${arxiu}&nomEnquesta=${encodeURIComponent(nomEnquesta)}`; // Passa el nom de l'arxiu com a paràmetre a través de la URL
-        enllaç.classList.add('enllaç-enquesta');
-        
-        // Crea un element d'element de llista per mostrar l'enllaç
-        const elementLlista = document.createElement('li');
-        elementLlista.appendChild(enllaç);
-        
-        // Afegeix l'element de llista a la llista d'enquestes
-        llistaEnquestes.appendChild(elementLlista);
-    });
-}
-
-// Carrega la llista d'enquestes quan la pàgina s'ha carregat completament
-document.addEventListener('DOMContentLoaded', carregarLlistaEnquestes);
+// Declaració de variables globals
+let preguntes; // Almacenarà totes les preguntes
+let preguntaActual = 0; // Variable per seguir la pregunta actual
+const rutaArxiu = `./JSON/${obtenirParametreUrl('arxiu')}`;
+const nomEnquesta = obtenirParametreUrl('nomEnquesta');
 
 // Per el formulari de les preguntes de l'enquesta
 async function llegirDades(rutaArxiu) {
     try {
-        const response = await fetch(rutaArxiu);
+        const response = await fetch(rutaArxiu);        
         const dadesJSON = await response.json();
         return dadesJSON.preguntes; // Accedim a l'array de preguntes
     } catch (error) {
@@ -63,20 +16,15 @@ async function llegirDades(rutaArxiu) {
     }
 }
 
-// Declaració de variables globals
-let preguntas; // Almacenarà totes les preguntes
-let preguntaActual = 0; // Variable per seguir la pregunta actual
-
 // Funció per carregar les preguntes i mostrar la primera pregunta
 async function carregarPreguntes() {
-    const rutaArxiu = obtenirParametreUrl('arxiu');
-    const nomEnquesta = obtenirParametreUrl('nomEnquesta');
+    
     const titolEnquesta = document.createElement('h2');
     const title = document.getElementById('title');
 
-    preguntas = await llegirDades(rutaArxiu);
+    preguntes = await llegirDades(rutaArxiu);
 
-    if (!preguntas || preguntas.length === 0) {
+    if (!preguntes || preguntes.length === 0) {
         console.error('No es van poder carregar les preguntes.');
         return;
     }
@@ -93,7 +41,7 @@ function mostrarPregunta() {
     const formulariDiv = document.getElementById('formulari');
     formulariDiv.innerHTML = ''; // Netegem el formulari abans de mostrar la nova pregunta
 
-    const pregunta = preguntas[preguntaActual];
+    const pregunta = preguntes[preguntaActual];
     const label = document.createElement('label');
     label.textContent = pregunta.pregunta;
 
@@ -106,7 +54,7 @@ function mostrarPregunta() {
         // Comprova si la tecla premuda és la tecla "Enter"
         if (event.key === 'Enter') {
             event.preventDefault(); // Evita l'enviament del formulari
-            if (preguntaActual < preguntas.length - 1) {
+            if (preguntaActual < preguntes.length - 1) {
                 seguentPregunta(); // Passa a la següent pregunta
             } else {
                 enviarFormulari(); // Envia el formulari
@@ -131,7 +79,7 @@ function mostrarPregunta() {
 
     // Crear el botó de "Següent" o "Enviar"
     const botoSeguent = document.createElement('button');
-    if (preguntaActual < preguntas.length - 1) {
+    if (preguntaActual < preguntes.length - 1) {
         botoSeguent.textContent = 'Següent';
         botoSeguent.addEventListener('click', seguentPregunta);
         botoSeguent.classList.add('form-buttons');

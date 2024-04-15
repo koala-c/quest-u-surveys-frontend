@@ -1,10 +1,13 @@
 body, html {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(to bottom right, #fff7ed, #fc7613);
+    /* background-image: linear-gradient(to bottom right, #fff7ed, #fc7613); */
+    /* background-image: linear-gradient(to bottom right, #fff7ed, #ff9346); */
+    /* background-image: linear-gradient(to bottom right, #f1efe7, #c1bfb9); */
+    background-color: #f1efe7;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -51,6 +54,7 @@ textarea {
     border-radius: 5px;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.9);
+    font-family: 'Quicksand', sans-serif;
 }
 
 select {
@@ -66,6 +70,10 @@ textarea {
     resize: vertical;
     min-height: 100px;
     background-color: rgba(255, 255, 255, 0.9);
+}
+
+input::placeholder, select::placeholder, textarea::placeholder, button {
+    font-family: 'Quicksand', sans-serif;
 }
 
 .error-message {
@@ -114,7 +122,8 @@ textarea {
 }
 
 .titol-enquesta {
-    color: white;
+    /* color: #fe9639; */
+    color: black;
     padding: 0.5rem; 
     text-align: center;
     vertical-align: middle;
@@ -133,7 +142,11 @@ textarea {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fe9639;
+    /* background-color: #fe953977; */
+    background-color: white;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .back-button {

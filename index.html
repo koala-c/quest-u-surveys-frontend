@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./enquestes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Enquestes</title>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="img-menu">
+            <img src="/img/round quest-u logo.png" alt="">
+            <div class="side-menu">
+                <details>
+                    <summary>Enquesta</summary>
+                    <li><a href="#"><i class="fas fa-plus"></i>Crear Enquesta</a></li>
+                    <li><a href="#">Esborrar Enquesta</a></li>
+                    <li><a href="#">Modificar Enquesta</a></li>
+                </details>
+                <details>
+                    <summary>Usuari</summary>
+                    <li><a href="#"><i class="fas fa-plus"></i>Crear Usuari</a></li>
+                    <li><a href="#">Esborrar Usuari</a></li>
+                    <li><a href="#">Modificar Usuari</a></li>
+                </details>
+            </div>
+        </div>
+        <div class="signout-container">
+            <button id="logout-button" class="signout"><i class="fas fa-sign-out-alt"></i>Tanca la sessió</button>
+        </div>
+    </div>
+    
+    <div id="content">
+        <div id="stats">
+            <!-- Aquí posa els stats -->
+            <h2>Estadístiques</h2>
+            <div id="stats-container">
+                <div id="stats-containers">
+                    <span>Usuaris</span>
+                    <b><span id="numUsuaris"></span></b>
+                </div>
+                <div id="stats-containers">
+                    <span>Enquestes</span>
+                    <b><span id="numEnquestes"></span></b>
+                </div>
+                <div id="stats-containers">
+                    <span>Respostes</span>
+                    <b><span id="numRespostes"></span></b>
+                </div>                
+            </div>
+        </div>
+        <div id="enquestes">
+            <!-- Aquí posa la llista d'enquestes disponibles -->
+            <h2>Enquestes Disponibles</h2>
+            <div id="llista-enquestes" class="enquestes-list"></div>
+        </div>
+    </div>
+    <div class="spinner-container" id="spinner-container">
+        <div class="spinner"></div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
