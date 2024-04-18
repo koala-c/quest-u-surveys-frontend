@@ -1,0 +1,427 @@
+/* Estils per a la pàgina de dashboard */
+body, html {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    background-color: #f1efe7;
+    color: #000;
+}
+
+h1, h2, h3, h4, h5, h6, summary {
+    font-family: 'League Spartan', sans-serif;
+}
+
+#sidebar {
+    width: 250px;
+    background-color: #fff; 
+    color: #000;
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+#sidebar img {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.side-menu {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    max-height: 440px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;    
+}
+
+/* Estil per a la barra de desplaçament vertical */
+*::-webkit-scrollbar {
+    width: 10px; /* Amplada de la barra de desplaçament */
+    background-color: #f5f5f5; /* Color de fons de la barra de desplaçament */
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del fons del botó de la barra de desplaçament */
+    border-radius: 5px; /* Radio de les vores del botó de la barra de desplaçament */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color del fons del botó de la barra de desplaçament en estat de ratolí per sobre */
+}
+
+/* Estil per a la barra de desplaçament horitzontal */
+*::-webkit-scrollbar:horizontal {
+    height: 10px; /* Amplada de la barra de desplaçament */
+    background-color: #f5f5f5; /* Color de fons de la barra de desplaçament */
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb:horizontal {
+    background-color: #888; /* Color del polze de la barra de desplaçament horitzontal */
+    border-radius: 5px; /* Radi de la vora del polze */
+}
+
+*::-webkit-scrollbar-thumb:hover:horizontal {
+    background-color: #555; /* Color del fons del botó de la barra de desplaçament en estat de ratolí per sobre */
+}
+
+.side-menu .content {
+    position: relative;
+}
+
+.side-menu .content::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Ajusta la posició cap amunt */
+    right: 0;
+    width: 100%;
+    height: 10px; /* Alçada de l'overflow */
+    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff); /* Gradiente per a l'overflow */
+}
+
+/* Estils per als desplegables */
+details {
+    margin-bottom: 10px;
+    list-style-type: none;
+    width: 100%;
+}
+
+/* Estils per al títol del desplegable */
+summary {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 20px;
+}
+
+summary::marker {
+    font-size: 0.8em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Estils per al títol del desplegable quan es passa el ratolí per sobre */
+summary:hover {
+    background-color: #f1efe7;
+}
+
+/* Estils per als enllaços dels desplegables */
+details > li {
+    padding-left: 20px;
+    padding-right: 0;
+}
+
+details > li > a {
+    color: #000;
+    text-decoration: none;
+    display: inline-block; /* Cambiem a inline-block per centrar horitzontalment */
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Estils per als enllaços dels desplegables quan es passa el ratolí per sobre */
+details > li > a:hover, .signout:hover {
+    background-color: #f1efe7;
+}
+
+details > li > a > i {
+    padding-right: 10px;
+}
+
+.signout {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.signout i {
+    margin-right: 10px;
+}
+
+.signout-container {
+    display: block;
+    bottom: 0;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Estils per a la llista d'enquestes */
+#enquestes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estils per a la llista d'enquestes */
+.enquestes-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 430px;
+    overflow-y: auto;
+    padding: 10px 10px; /* Padding top i bottom = 10px, Padding left i right = 10px */
+}
+
+.enquestes-div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.enquestes-div:hover {
+    transform: translateY(-3px);
+}
+
+.enquestes-cel {
+    width: 33%;
+}
+
+.enquestes-cel:not(:first-child) {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#stats {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#stats-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+#stats-containers {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#stats-containers p {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#stats-containers:nth-child(1):hover {
+    background-color: #e1ded1;
+    border-color: #e1ded1;
+}
+
+.boto-editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f1efe7;
+    width: 40px;
+    height: 30px;
+}
+
+.boto-editar:hover {
+    background-color: #e1ded1;
+}
+
+.boto-editar i {
+    font-size: 15px;
+}
+
+.boto-eliminar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: black;
+    width: 40px;
+    height: 30px;
+}
+
+.boto-eliminar:hover {
+    background-color: red;
+}
+
+.boto-eliminar i {
+    color: white;
+    font-size: 15px;
+}
+
+.data-validesa-passada {
+    color: red;
+}
+
+/* Estils per el spinner */
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Por defecto oculto */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
+    z-index: 9999; /* Asegura que el spinner esté por encima de otros elementos */
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #9e9e9e;
+    border-top: 4px solid #f1efe7;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    opacity: 0; /* Inicialment, el toast estarà ocult */
+    transition: opacity 0.3s ease; /* Animació per a mostrar / amagar el toast */
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+#toast-img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+#toast-container.show {
+    opacity: 1; /* Quan s'afegeix la classe 'show', el toast serà visible */
+}
+
+/* Estilos del modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s; /* Transición de color suave */
+}
+
+.close:hover {
+    color: #666; /* Cambiar color al pasar el ratón por encima */
+}
+
+.user-stats {
+    cursor: pointer;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.user-list-item:last-child {
+    border-bottom: none;
+}
+
+.user-list-item:hover {
+    background-color: #f9f9f9;
+}
+
+.user-list-buttons {    
+    display: flex;
+    align-items: center;
+}

@@ -154,3 +154,40 @@ input::placeholder, select::placeholder, textarea::placeholder, button {
     border: none;
     padding-left: 20px;
 }
+
+/* Estils per el spinner */
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    z-index: 9999;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #9e9e9e;
+    border-top: 4px solid #f1efe7;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+/* Estilos para el mensaje "Estamos generando sus preguntas" */
+.generating-message {
+    margin-top: 10px; /* Espacio entre el spinner y el mensaje */
+    font-size: 14px;
+    color: #333; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./enquestes.css">
+    <link rel="stylesheet" href="./main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Enquestes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div id="sidebar">
@@ -17,15 +18,13 @@
             <div class="side-menu">
                 <details>
                     <summary>Enquesta</summary>
-                    <li><a href="#"><i class="fas fa-plus"></i>Crear Enquesta</a></li>
-                    <li><a href="#">Esborrar Enquesta</a></li>
-                    <li><a href="#">Modificar Enquesta</a></li>
+                    <li id="crearEnquesta"><a href=""><i class="fas fa-plus"></i>Crear Enquesta</a></li>
+                    <li id="totesEnquestes"><a href=""><i class="fas fa-poll"></i>Totes les enquestes</a></li>
                 </details>
                 <details>
                     <summary>Usuari</summary>
-                    <li><a href="#"><i class="fas fa-plus"></i>Crear Usuari</a></li>
-                    <li><a href="#">Esborrar Usuari</a></li>
-                    <li><a href="#">Modificar Usuari</a></li>
+                    <li id="crearUsuari"><a href=""><i class="fas fa-plus"></i>Crear Usuari</a></li>
+                    <li id="mevesEnquestes"><a href=""><i class="fas fa-poll"></i>Les meves enquestes</a></li>
                 </details>
             </div>
         </div>
@@ -39,7 +38,7 @@
             <!-- Aquí posa els stats -->
             <h2>Estadístiques</h2>
             <div id="stats-container">
-                <div id="stats-containers">
+                <div id="stats-containers" class="user-stats">
                     <span>Usuaris</span>
                     <b><span id="numUsuaris"></span></b>
                 </div>
@@ -53,15 +52,29 @@
                 </div>                
             </div>
         </div>
+        <!-- Modal -->
+        <div id="userListModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Llista d'usuaris</h2>
+                <div id="userList"></div>
+            </div>
+        </div>
         <div id="enquestes">
             <!-- Aquí posa la llista d'enquestes disponibles -->
-            <h2>Enquestes Disponibles</h2>
+            <h2 id="titolLlista"></h2>
             <div id="llista-enquestes" class="enquestes-list"></div>
         </div>
     </div>
     <div class="spinner-container" id="spinner-container">
         <div class="spinner"></div>
     </div>
+    <div id="toast-container">
+        <div class="toast">
+            <img id="toast-img" src="./img/sad-cry-emoji.png" alt="Sad and crying emoji">
+            <span id="toast-message"></span>
+        </div>
+    </div>    
     <script src="./main.js"></script>
 </body>
 </html>
